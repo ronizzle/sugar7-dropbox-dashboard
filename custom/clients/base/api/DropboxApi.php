@@ -27,23 +27,34 @@ class DropboxApi extends SugarApi
         );
     }
 
+    /**
+     * @param ServiceBase $api
+     * @param array $args
+     * @return mixed
+     */
     public function getDropbox(ServiceBase $api, array $args) {
+
+        return json_decode($this->getFileListFromDropbox());
+    }
+
+    /**
+     * @return string
+     * @throws Zend_Http_Client_Exception
+     */
+    protected function getFileListFromDropbox() {
 
         $baseUrl = "https://api.dropboxapi.com";
 
         $access_token = 'yyf4aHQGUOAAAAAAAAAAC6kiVe7imBX59CSxOWpJ2VADpdgYU8_RzNoOU4ZYsDWZ';
-
-        $client = new Zend_Http_Client();
-        $client->setUri($baseUrl . '/2/files/list_folder');
-        $client->setHeaders('Content-Type', 'application/json');
-        $client->setHeaders('Authorization', 'Bearer '. $access_token);
-        $client->setRawData(json_encode([
+        $fileClient = new Zend_Http_Client();
+        $fileClient->setUri($baseUrl . '/2/files/list_folder');
+        $fileClient->setHeaders('Content-Type', 'application/json');
+        $fileClient->setHeaders('Authorization', 'Bearer '. $access_token);
+        $fileClient->setRawData(json_encode([
             'path' => '/roniel-files'
         ]));
 
-        $response = $client->request(Zend_Http_Client::POST);
-        $data = $response->getBody();
-
-        return json_decode($data);
+        $response = $fileClient->request(Zend_Http_Client::POST);
+        return $response->getBody();
     }
 }
