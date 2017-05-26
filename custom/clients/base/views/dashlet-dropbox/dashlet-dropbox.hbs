@@ -1,0 +1,16 @@
+{{#if entries}}
+    <table class="table table-bordered table-striped dataTable ">
+        <thead>
+            <th><strong>File name</strong></th>
+        </thead>
+        {{#each entries}}
+            <tr>
+                <td>
+                    <p>{{this.name}}</p>
+                </td>
+            </tr>
+        {{/each}}
+    </table>
+{{else}}
+    <div class="block-footer">{{str "LBL_NO_DATA_AVAILABLE"}}</div>
+{{/if}}
