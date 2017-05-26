@@ -1,2 +1,1 @@
-# sugar7-dropbox-dashboard
-Sugar 7 dashboard with Dropbox API integration
+### Dropbox Dashboard for Sugar 7.9
